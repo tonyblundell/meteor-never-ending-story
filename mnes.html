@@ -1,0 +1,34 @@
+<head>
+  <title>nes</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>The Never Ending Story</h1>
+        {{> story}}
+        {{> form}}
+    </div>
+</body>
+
+<template name="story">
+    <p id="story" class="">
+        {{#each sentences}}
+            {{> sentence}}
+        {{/each}}
+    </p>
+</template>
+
+<template name="sentence">
+    <span title="{{name}}">{{text}}</span>
+</template>
+
+<template name="form">
+    <form class="well form-inline">
+        <input type="text" name="name" id="name" placeholder="Your name" class="span2" />
+        <input type="text" name="text" id="text" placeholder="Your sentence" class="span3">
+        <button type="submit" class="btn">Contribute</button>
+        {{#if thunderStolen}}
+            <span class="label label-warning">Someone added to the story while you were typing.</span>
+        {{/if}}
+    </form>
+</template>

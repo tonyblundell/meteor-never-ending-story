@@ -1,1 +1,3 @@
-/* CSS declarations go here */
+.container { padding: 10px 0; }
+.story { padding: 10px 0; line-height: 18px; }
+.story .sentence { font-family: 'Gloria Hallelujah', cursive; font-size: 16px; }

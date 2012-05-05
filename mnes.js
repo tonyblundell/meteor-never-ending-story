@@ -37,13 +37,14 @@ if (Meteor.is_server) {
 
     Meteor.startup(function () {
         if (Sentences.find().count() === 0) {
-            Sentences.insert({name: 'Storyteller', text: 'Once upon a time,'});
+            Sentences.insert({name: 'Storyteller', text: 'Once upon a time,', date: 0});
         }
     });
 
     Meteor.methods({
         addSentence: function(sentence) {
             sentence.date = (new Date()).getTime();
+            console.log(date);
             return Sentences.insert(sentence);
         }
     });

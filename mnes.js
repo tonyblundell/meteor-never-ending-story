@@ -11,7 +11,7 @@ if (Meteor.is_client) {
     })
 
     Template.story.sentences = function() {
-        return Sentences.find();
+        return Sentences.find({}, {sort: {date: 1}});
     };
 
     Template.form.events = {
@@ -20,7 +20,7 @@ if (Meteor.is_client) {
             var name = $('#name').val();
             var text = $('#text').val();
             if (name && text) {
-                Sentences.insert({name: name, text: text});
+                Meteor.call('addSentence', {name: name, text: text});
                 $('#text').val('');
                 Session.set('thunderStolen', false);
             }
@@ -32,10 +32,20 @@ if (Meteor.is_client) {
     };
 }
 
+
 if (Meteor.is_server) {
+
     Meteor.startup(function () {
         if (Sentences.find().count() === 0) {
             Sentences.insert({name: 'Storyteller', text: 'Once upon a time,'});
         }
     });
+
+    Meteor.methods({
+        addSentence: function(sentence) {
+            sentence.date = (new Date()).getTime();
+            return Sentences.insert(sentence);
+        }
+    });
+
 }

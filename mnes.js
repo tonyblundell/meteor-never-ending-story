@@ -44,7 +44,6 @@ if (Meteor.is_server) {
     Meteor.methods({
         addSentence: function(sentence) {
             sentence.date = (new Date()).getTime();
-            console.log(date);
             return Sentences.insert(sentence);
         }
     });
